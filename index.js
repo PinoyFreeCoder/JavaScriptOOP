@@ -1,30 +1,63 @@
-//Object Literals
-// const people = {
+const string = 'PinoyFreeCoder'; //Primitive but its an object in the background
 
-//     Name: 'juan Dela Cruz',
-//     Age: 30,
-//     Gender: 'Male'
-// }
- 
-//ES5 Constructor
-function People(Name, Age, Gender){
+const string2 = new String('PinoyFreeCoder'); //Create String as object
+
+// Object Literals
+const people = {
+    Name : 'Juan Dela Cruz',
+    Age : 30,
+    Gender: 'Male',
+    getInfo: function() {
+        return `${this.Name} is a ${this.Gender} and ${this.Age} years old`;
+    }
+}
+
+console.log(Object.values(people));
+console.log(Object.keys(people));
+
+//Constructor
+function People(Name, Age, Gender)
+{
     this.Name = Name;
     this.Age = Age;
     this.Gender = Gender;
 
-    // this.getInfo = function(){
-    //     return `${this.Name} is a ${this.Gender} and ${this.Age} years old`;
-    // }
+    this.getInfo = function(){
+        return `${this.Name} is a ${this.Gender} and ${this.Age} years old`;
+    }
 }
 
+//class constuctor ES6
+class People {
+    constructor(Name, Age, Gender) {
+        this.Name = Name;
+        this.Age = Age;
+        this.Gender = Gender;
+    }
+  }
+
+//Instatiate an Object
+const people = new People('Juan Dela Cruz', 30, 'Male');
+const people2 = new People('Juana Dela Cruz', 28, 'Female');
+
+//Prototype is a Sudo object
 //Create a prototype
 People.prototype.getInfo = function(){
-    return `${this.Name} is a ${this.Gender} and ${this.Age} years old`;
+    
+  return `${this.Name} is a ${this.Gender} and ${this.Age} years old`;
+ 
 }
 
-People.prototype.getAge = function() {
-    return `${this.Name} is ${this.Age} years old`;
+People.prototype.getAge = function ()
+{
+    return `${this.Name} is ${this.Age} years old.`;
 }
+
+People.prototype.enRoll = function(YearEnrolled){
+    let dateEnrolled = YearEnrolled;
+    this.enrolled = true;
+    return `${this.Name} was enrolled on ${dateEnrolled}`;
+};
 
 //inheritance
 function Students(Name, Age, Gender, YearEnrolled){
@@ -35,19 +68,13 @@ function Students(Name, Age, Gender, YearEnrolled){
 
 Students.prototype = Object.create(People.prototype);
 
-Students.prototype.enRoll = function(YearEnrolled){
-    this.year = YearEnrolled;
-    this.enrolled = true;
-}
+const student = new Students('Juan Dela Cruz',21,'Male','2020');
 
+//User Student as a Constructor
+Students.prototype.constructor = Students;
 
-const student = new Students('Juan Dela Cruz', 30, 'Male', '2020');
-
-// const people = new People('Juan Dela Cruz', 30, 'Male');
-// const people2 = new People('Juana Dela Cruz', 26, 'Female');
-
-//console.log(student);
-student.enRoll('2021');
 console.log(student);
 
-
+// console.log(people);
+// console.log(people.enRoll('2020'));
+// console.log(people);
